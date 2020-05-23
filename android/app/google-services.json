@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "912186743385",
+    "firebase_url": "https://jantagarage-96e2c.firebaseio.com",
+    "project_id": "jantagarage-96e2c",
+    "storage_bucket": "jantagarage-96e2c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912186743385:android:7cadd69f861028b59d2f48",
+        "android_client_info": {
+          "package_name": "com.main"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "912186743385-vm4a8p2344s63pj38o28uab7uu1cftb3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.main",
+            "certificate_hash": "7430c61db663ff0f601f2bb48e5b79d530bbf7af"
+          }
+        },
+        {
+          "client_id": "912186743385-i05ircqhctkvdndm2pra5l5h8gkg9s24.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC46ZRWde9ZcnKtLS0uIwpX2yESoPHpuz0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "912186743385-i05ircqhctkvdndm2pra5l5h8gkg9s24.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
