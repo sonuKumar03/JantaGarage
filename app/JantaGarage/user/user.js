@@ -16,8 +16,8 @@ const UserSlice = createSlice({
     }
 })
 
-export const isLoggedIn = state=>state.isLoggedIn
-export const selectUserId = state=>state.userId
+export const selectIsLoggedIn = state=>state.user.isLoggedIn
+export const selectUserId = state=>state.user.userId
 
 const {actions,reducer} = UserSlice;
 

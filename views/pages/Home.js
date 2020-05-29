@@ -1,60 +1,77 @@
 import 'react-native-gesture-handler';
-import React from 'react';
-import {Text, View,  Header} from 'native-base';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
-import { NavigationContainer } from '@react-navigation/native';
-import Material from 'react-native-vector-icons/MaterialCommunityIcons'
+import React, {useEffect} from 'react';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {NavigationContainer} from '@react-navigation/native';
+import Material from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useDispatch, useSelector} from 'react-redux';
+import {getStores} from '../../api/store';
+import StoreStackScreen from './Stacks/StoreStack';
+import Fav from './Fav';
+import Orders from './OrdersView/Orders';
+import {selectIsLoggedIn} from '../../app/JantaGarage/user/user';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+
+const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
-import Stores from './Stores';
-
-const Fav = ()=>{
-  return (
-    <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-        <Text>Fav</Text>
-    </View>
-  )
-}
-
-const History = ()=>{
-  return (
-    <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-        <Text>History</Text>
-    </View>
-  )
-}
 
 function Home() {
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  useEffect(() => {
+    dispatch(getStores());
+  }, []);
   return (
     <>
-    <Header/>
-    <NavigationContainer>
-    <Tab.Navigator lazy={true}
-    tabBarOptions={{
-      showLabel:false,
-      activeBackgroundColor:'#dedede',
-      activeTintColor:'#3700B3'
-    }}
-    >
-      <Tab.Screen name="Home" options={
-        {
-          tabBarLabel:'Home',
-          tabBarIcon:({color,size})=><Material color={color} size={size} name='home'/>
-        }
-      } component={Stores}/>
-      <Tab.Screen name="Fav" component={Fav}
-        options={{
-          tabBarIcon:({color,size})=><Material color={color} size={size} name="heart"/>
-        }}
-      />
-      <Tab.Screen name="History" component={History} 
-      options={{
-        tabBarIcon:({color,size})=><Material  color={color} size={size} name="refresh"/>
-      }}
-      />
-    </Tab.Navigator>
-    </NavigationContainer>
+      <Tab.Navigator
+        lazy={true}
+        tabBarOptions={{
+          showLabel: false,
+          activeBackgroundColor: '#dedede',
+          activeTintColor: '#cc0000',
+        }}>
+        <Tab.Screen
+          name="Home"
+          options={{
+            tabBarLabel: 'Home',
+            tabBarIcon: ({color, size}) => (
+              <Material color={color} size={size} name="home" />
+            ),
+          }}
+          component={StoreStackScreen}
+        />
+        <Tab.Screen
+          name="History"
+          component={Orders}
+          options={{
+            tabBarIcon: ({color, size}) => (
+              <Material color={color} size={size} name="refresh" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Fav"
+          component={Fav}
+          options={{
+            tabBarIcon: ({color, size}) => (
+              <Material color={color} size={size} name="heart" />
+            ),
+          }}
+        />
+      </Tab.Navigator>
     </>
   );
 }
-
-export default Home;
+const Main = () => {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator initialRouteName="Home" drawerPosition="right">
+        <Drawer.Screen
+          name="Home"
+          component={Home}
+          options={{swipeEnabled: false}}
+        />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+};
+export default Main;
